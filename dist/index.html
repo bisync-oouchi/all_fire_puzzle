@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#17130f">
+  <meta name="description" content="追放された底辺放火魔のおっさんが異世界転生にて着火無双でお姫様の心に火をつける">
+  <title>追放された底辺放火魔のおっさんが異世界転生にて着火無双でお姫様の心に火をつける</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+    <section id="title-screen" class="screen active" aria-labelledby="game-title">
+      <h1 id="game-title"><img class="title-image" src="assets/FIRE_title_b.jpg" alt="追放された底辺放火魔のおっさんが異世界転生にて着火無双でお姫様の心に火をつける"></h1>
+      <div class="title-overlay">
+        <p class="eyebrow title-genre">FIRE CHAIN PUZZLE</p>
+        <p class="title-copy">寝落ちするためにダラダラ遊ぶゲーム。<br>BGM聞きながらプレイしてください。</p>
+        <button id="start-button" class="primary pixel-button">はじめる</button>
+        <p class="tiny">TAP / CLICK / ENTER</p>
+      </div>
+    </section>
+
+    <section id="mode-screen" class="screen" aria-labelledby="mode-title">
+      <header class="screen-header">
+        <div><p class="eyebrow">MODE SELECT</p><h2 id="mode-title">遊び方を選ぶ</h2></div>
+      </header>
+      <div class="mode-list">
+        <button id="burn-mode-button" class="mode-card burn-mode">
+          <strong>焼き尽くしモード</strong><span>全ての燃焼対象を灰にする</span>
+        </button>
+        <button id="rescue-mode-button" class="mode-card rescue-mode">
+          <strong>救出モード</strong><span>檻を焼き、姫を出口へ導く</span>
+        </button>
+      </div>
+      <button id="mode-title-button" class="pixel-button">タイトルへ</button>
+    </section>
+
+    <section id="select-screen" class="screen" aria-labelledby="select-title">
+      <header class="screen-header">
+        <button id="mode-back-button" class="icon-button" aria-label="モード選択へ戻る">‹</button>
+        <div class="select-heading"><p class="eyebrow">SELECT</p><h2 id="select-title">ステージ選択</h2></div>
+        <button id="select-sound" class="icon-button" aria-label="音声を切り替える">♪</button>
+      </header>
+      <div class="progress-line"><span id="progress-text">1 / 200 解放</span><span id="total-stars">★ 000 / 600</span></div>
+      <div id="stage-list" class="stage-list" aria-label="ステージ一覧"></div>
+      <div class="legend">
+        <span>★★★ 最短</span>
+        <span>★☆☆ クリア</span>
+        <span>☆☆☆ 未クリア</span>
+      </div>
+    </section>
+
+    <section id="game-screen" class="screen" aria-label="ゲーム画面">
+      <header class="hud">
+        <button id="back-button" class="icon-button" aria-label="ステージ選択へ戻る">‹</button>
+        <div class="hud-stage"><small>STAGE</small><strong id="stage-number">01</strong></div>
+        <div class="hud-stat"><small>MIN</small><strong id="minimum-value">0</strong></div>
+        <div class="hud-stat"><small>FIRE</small><strong id="fire-value">0</strong></div>
+        <button id="speed-button" class="speed-button" aria-label="ゲーム速度">×1</button>
+        <button id="speed-lock-button" class="speed-lock-button" type="button" aria-label="速度を次のプレイにも固定" aria-pressed="false">固定</button>
+        <button id="game-sound" class="icon-button" aria-label="音声を切り替える">♪</button>
+      </header>
+      <div class="objective">
+        <span id="difficulty-label">LEVEL 1</span>
+        <div id="zoom-controls" class="zoom-controls" hidden>
+          <button id="zoom-out" aria-label="縮小">−</button>
+          <button id="zoom-fit" aria-label="全体表示">全体</button>
+          <button id="zoom-in" aria-label="拡大">＋</button>
+        </div>
+        <span id="object-count">残り 0</span>
+      </div>
+      <div id="canvas-wrap">
+        <canvas id="game-canvas" width="384" height="520" aria-label="燃焼パズル盤面"></canvas>
+        <button id="result-return-button" class="result-return" hidden>結果へ戻る</button>
+        <div id="result-panel" class="result-panel" hidden>
+          <p id="result-kicker" class="eyebrow">STAGE CLEAR</p>
+          <h2 id="result-title">鎮火完了</h2>
+          <div id="result-stars" class="result-stars">☆☆☆</div>
+          <p id="result-detail">未クリア</p>
+          <div class="result-actions">
+            <button id="inspect-button" class="pixel-button" hidden>盤面を見る</button>
+            <button id="retry-button" class="pixel-button">もう一度</button>
+            <button id="next-button" class="pixel-button primary">次へ</button>
+          </div>
+        </div>
+      </div>
+      <section id="object-guide" class="object-guide" aria-label="登場objectの説明">
+        <button id="guide-prev" class="guide-arrow" aria-label="前のobject">‹</button>
+        <canvas id="guide-canvas" width="64" height="64" aria-hidden="true"></canvas>
+        <div class="guide-copy" aria-live="polite">
+          <div class="guide-title"><strong id="guide-name">object</strong><span id="guide-position">1 / 1</span></div>
+          <div id="guide-stats" class="guide-stats">引火耐性 0　燃焼時間 0秒　燃焼火力 0</div>
+          <p id="guide-effect">特殊効果の説明</p>
+        </div>
+        <button id="guide-next" class="guide-arrow" aria-label="次のobject">›</button>
+      </section>
+      <footer class="game-footer">
+        <p id="hint-text" role="status" aria-live="polite">道路から2マス以内をタッチして着火</p>
+        <button id="restart-button" class="retry-button" aria-label="このステージを最初からリトライ">↻ リトライ</button>
+      </footer>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "hinomawari",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node tools/build.mjs && node tools/server.mjs",
+    "preview": "node tools/server.mjs --root dist",
+    "test": "node tests/run-tests.mjs",
+    "generate": "node tools/generate-stages.mjs && node tools/generate-rescue-stages.mjs",
+    "build": "node tools/build.mjs"
+  }
+}
